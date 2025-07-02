@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import { BsCart } from "react-icons/bs";
 import { IoPersonOutline } from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { FaBox, FaHeadphones, FaStore, FaTimes } from "react-icons/fa";
 import falcon from "../../assets/images/falcon.png";
+import { CartContext } from "../../context/CartContext";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  const { cart } = useContext(CartContext);
+  const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -74,7 +78,7 @@ const Header = () => {
           <div className="relative">
             <BsCart className="w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8" />
             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-4 h-4 md:w-5 md:h-5 flex items-center justify-center font-semibold">
-              12
+              {cartCount}
             </span>
           </div>
 
