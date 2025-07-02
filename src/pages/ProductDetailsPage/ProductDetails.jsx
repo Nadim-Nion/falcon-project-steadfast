@@ -1,11 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useContext } from "react";
-import {
-  FaBox,
-  FaRegCheckCircle,
-  FaRegHeart,
-  FaStar,
-} from "react-icons/fa";
+import { FaBox, FaRegCheckCircle, FaRegHeart, FaStar } from "react-icons/fa";
 import { IoShareSocialOutline } from "react-icons/io5";
 import { CiClock2 } from "react-icons/ci";
 import { BsPlus } from "react-icons/bs";
@@ -15,6 +10,7 @@ import axios from "axios";
 import { CartContext } from "../../context/CartContext";
 import { IoIosArrowUp } from "react-icons/io";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { Link } from "react-router";
 
 const ProductDetails = () => {
   const [selectedVariant, setSelectedVariant] = useState(12345678);
@@ -170,9 +166,7 @@ const ProductDetails = () => {
                       selectedColor === index
                         ? "border-teal-500"
                         : "border-gray-200"
-                    } ${
-                      !variation.total_stock_qty > 0 ? "opacity-50" : ""
-                    }`}
+                    } ${!variation.total_stock_qty > 0 ? "opacity-50" : ""}`}
                     disabled={!variation.total_stock_qty > 0}
                   >
                     <img
@@ -239,17 +233,19 @@ const ProductDetails = () => {
             </div>
 
             {/* Add to Cart */}
-            <button
-              onClick={handleAddToCart}
-              disabled={maxQuantity === 0 || quantity === 0}
-              className={`w-full py-3 px-4 rounded-lg font-medium text-white transition ${
-                maxQuantity === 0 || quantity === 0
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-teal-600 hover:bg-teal-700 active:bg-teal-800"
-              }`}
-            >
-              {maxQuantity === 0 ? "Out of Stock" : "Add to Cart"}
-            </button>
+            <Link to={"/cart"}>
+              <button
+                onClick={handleAddToCart}
+                disabled={maxQuantity === 0 || quantity === 0}
+                className={`w-full py-3 px-4 rounded-lg font-medium text-white transition ${
+                  maxQuantity === 0 || quantity === 0
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-teal-600 hover:bg-teal-700 active:bg-teal-800"
+                }`}
+              >
+                {maxQuantity === 0 ? "Out of Stock" : "Add to Cart"}
+              </button>
+            </Link>
           </div>
 
           {/* Delivery + Seller */}
@@ -374,4 +370,3 @@ const ProductDetails = () => {
 };
 
 export default ProductDetails;
-
