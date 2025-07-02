@@ -8,6 +8,8 @@ import { HiMinusSm } from "react-icons/hi";
 import { FiMessageCircle } from "react-icons/fi";
 import axios from "axios";
 import { CartContext } from "../../context/CartContext";
+import { IoIosArrowUp } from "react-icons/io";
+import { MdKeyboardArrowDown } from "react-icons/md";
 
 const ProductDetails = () => {
   const [selectedVariant, setSelectedVariant] = useState(12345678);
@@ -16,6 +18,8 @@ const ProductDetails = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedVariationIndex, setSelectedVariationIndex] = useState(0); // default first variation
+  const [descriptionExpanded, setDescriptionExpanded] = useState(false);
+  const [specificationExpanded, setSpecificationExpanded] = useState(false);
 
   const selectedVariation = product?.variations?.[selectedVariationIndex];
   const maxQuantity = selectedVariation?.total_stock_qty || 0;
@@ -51,7 +55,7 @@ const ProductDetails = () => {
 
   const handleAddToCart = () => {
     // const selectedVariant = product.variations[selectedVariationIndex];
-    const selectedVariant = selectedVariation
+    const selectedVariant = selectedVariation;
 
     const cartItem = {
       product,
@@ -90,7 +94,8 @@ const ProductDetails = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 py-6">
+      {/* Product Details with Delivery Options Container */}
+      <div className="max-w-7xl mx-auto px-6 py-6 border-2 border-green-500">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Product Images */}
           <div className="lg:col-span-1">
@@ -392,6 +397,98 @@ const ProductDetails = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Description and Specification Container */}
+      <div className="max-w-7xl mx-auto p-6 bg-gray-50 min-h-screen">
+        {/* Description */}
+        <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">
+            Description
+          </h2>
+
+          <div className="text-sm text-gray-600 leading-relaxed space-y-3">
+            <p>
+              Just as a book is judged by its cover, the first thing you notice
+              when you pick up a modern smartphone is the display. Nothing
+              surprising, because advanced technologies allow you to practically
+              level the display frames and cutouts for the front camera and
+              speaker, leaving no room for bold design solutions. And how good
+              that in such realities Apple everything is fine with displays.
+            </p>
+
+            {descriptionExpanded && (
+              <p>
+                Advanced technologies allow you to practically level the display
+                frames and cutouts for the front camera and speaker, leaving no
+                room for bold design solutions. And how good that in such
+                realities Apple everything.
+              </p>
+            )}
+          </div>
+
+          <button
+            onClick={() => setDescriptionExpanded(!descriptionExpanded)}
+            className="flex items-center gap-2 mt-4 text-sm text-gray-600 hover:text-gray-800 transition-colors"
+          >
+            <span>See More</span>
+            {descriptionExpanded ? (
+              <IoIosArrowUp size={16} />
+            ) : (
+              <MdKeyboardArrowDown size={16} />
+            )}
+          </button>
+        </div>
+
+        {/* Specification */}
+        <div className="bg-white rounded-lg shadow-sm p-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">
+            Specification
+          </h2>
+
+          <div className="space-y-4">
+            <h3 className="text-base font-medium text-gray-900">
+              Sharp FP-J30E-B Air Purifier
+            </h3>
+
+            <ul className="text-sm text-gray-600 space-y-2">
+              <li className="flex items-start">
+                <span className="w-2 h-2 bg-gray-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                GMP Cosmetic Good Manufacturing Practice
+              </li>
+              <li className="flex items-start">
+                <span className="w-2 h-2 bg-gray-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                Cruelty Free
+              </li>
+              <li className="flex items-start">
+                <span className="w-2 h-2 bg-gray-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                No Animal Testing
+              </li>
+              <li className="flex items-start">
+                <span className="w-2 h-2 bg-gray-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                Zenus Global Standard
+              </li>
+              {specificationExpanded && (
+                <li className="flex items-start">
+                  <span className="w-2 h-2 bg-gray-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                  Comply with Global Standard
+                </li>
+              )}
+            </ul>
+          </div>
+
+          <button
+            onClick={() => setSpecificationExpanded(!specificationExpanded)}
+            className="flex items-center gap-2 mt-4 text-sm text-gray-600 hover:text-gray-800 transition-colors"
+          >
+            <span>See More</span>
+            {specificationExpanded ? (
+              <IoIosArrowUp size={16} />
+            ) : (
+              <MdKeyboardArrowDown size={16} />
+            )}
+          </button>
         </div>
       </div>
     </div>
