@@ -7,7 +7,7 @@ This project is built with **React.js** and **Tailwind CSS**, using **Context AP
 
 ## 🚀 Live Demo
 
-🔗 [View Live Site](https://your-deployment-link.com)
+🔗 [Netlify](https://falcon-project-steadfast.netlify.app/)
 
 ---
 
