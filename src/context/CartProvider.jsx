@@ -19,6 +19,8 @@ export const CartProvider = ({ children }) => {
           entry.selectedVariant?.id === item.selectedVariant?.id
       );
 
+      // console.log("existing:", existing);
+
       if (existing) {
         return prevCart.map((entry) =>
           entry === existing
@@ -31,10 +33,15 @@ export const CartProvider = ({ children }) => {
     });
   };
 
+  const updateCart = (updatedItems) => {
+  setCart(updatedItems);
+};
+
+
   const clearCart = () => setCart([]);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, clearCart }}>
+    <CartContext.Provider value={{ cart, addToCart, clearCart, updateCart }}>
       {children}
     </CartContext.Provider>
   );
